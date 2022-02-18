@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { generatePalette } from './colorHelpers';
 import Palette from './Palette';
 import seedColors from './seedColors';
@@ -8,12 +9,20 @@ class App extends Component {
   render() {
     
     return (
-      <div className="App">
-        <Palette palette={generatePalette(seedColors[4])} />
-      </div>
+      <Switch>
+        <Route exact path="/" render={ () =>  <h1>Palette list goes here</h1>} />
+          <Route exact path='/palette/:id' render={ () =>  <h1>Palette  individual</h1>}/>
+          
+     
+      </Switch>
+     
+      
+            //       <div className="App">
+            //   <Palette palette={generatePalette(seedColors[4])} />
+            // </div>
+      
     );
   }
   
 }
-
 export default App;
