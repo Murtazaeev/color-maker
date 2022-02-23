@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
-import { generatePalette } from './colorHelpers';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
 import seedColors from './seedColors';
+import { generatePalette } from './colorHelpers';
 
 class App extends Component {
 	findPalette(id) {
@@ -22,7 +22,6 @@ class App extends Component {
 						<Palette palette={generatePalette(this.findPalette(routeProps.match.params.id))} />
 					)}
 				/>
-				<PaletteList />
 			</Switch>
 
 			//       <div className="App">
@@ -32,3 +31,5 @@ class App extends Component {
 	}
 }
 export default App;
+
+// palettes={seedColors}
