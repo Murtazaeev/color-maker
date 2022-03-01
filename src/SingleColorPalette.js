@@ -5,7 +5,8 @@ import ColorBox from './ColorBox';
 class SingleColorPalette extends Component {
 	constructor(props) {
 		super(props);
-		this._state = this.gatherShades(this.props.palette, this.props.colorId);
+		this._shades = this.gatherShades(this.props.palette, this.props.colorId);
+		console.log(this._shades);
 	}
 	gatherShades(palette, colorToFilterBy) {
 		let shades = [];
@@ -16,9 +17,10 @@ class SingleColorPalette extends Component {
 		return shades.slice(1);
 	}
 	render() {
-		const colorBoxes = this._shades.map(
-			(color = <ColorBox key={color.id} name={color.name} background={color.hex} showLink={false} />)
-		);
+		const colorBoxes = this._shades.map((color) => (
+			<ColorBox key={color.id} name={color.name} background={color.hex} showLink={false} />
+		));
+
 		return (
 			<div className="Palette">
 				<h1>singel</h1>
