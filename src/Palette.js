@@ -45,12 +45,7 @@ class Palette extends Component {
 					handleChange={this.changeFormat}
 					showingAllColors
 				/>
-				{/* Navbar goes here */}
-				<div className="Palette-colors">
-					{' '}
-					{/* bunch of color boxes */}
-					{colorBoxes}
-				</div>
+				<div className="Palette-colors">{colorBoxes}</div>
 				<PaletteFooter paletteName={paletteName} emoji={emoji} />
 			</div>
 		);
