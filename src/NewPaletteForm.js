@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -59,74 +59,95 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end'
 }));
 
-export default function NewPaletteForm() {
-	const theme = useTheme();
-	const [ open, setOpen ] = React.useState(false);
-
-	const handleDrawerOpen = () => {
-		setOpen(true);
+export default class NewPaletteForm extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isDrawerOpen: false,
+			currentColor: 'teal',
+			colors: [ 'purple', '#e15764' ]
+		};
+		this.updateCurrColor = this.updateCurrColor.bind(this);
+		this.addNewColor = this.addNewColor.bind(this);
+	}
+	handleDrawerOpen = () => {
+		this.setState({ isDrawerOpen: true });
 	};
 
-	const handleDrawerClose = () => {
-		setOpen(false);
+	handleDrawerClose = () => {
+		this.setState({ isDrawerOpen: false });
 	};
+	updateCurrColor(newColor) {
+		this.setState({ currentColor: newColor.hex });
+	}
+	addNewColor() {
+		this.setState({ colors: [ ...this.state.colors, this.state.currentColor ] });
+	}
 
-	return (
-		<Box sx={{ display: 'flex' }}>
-			<CssBaseline />
-			<AppBar position="fixed" open={open}>
-				<Toolbar>
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						onClick={handleDrawerOpen}
-						edge="start"
-						sx={{ mr: 2, ...(open && { display: 'none' }) }}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography variant="h6" noWrap component="div">
-						Persistent drawer
-					</Typography>
-				</Toolbar>
-			</AppBar>
-			<Drawer
-				sx={{
-					width: drawerWidth,
-					flexShrink: 0,
-					'& .MuiDrawer-paper': {
+	render() {
+		return (
+			<Box sx={{ display: 'flex' }}>
+				<CssBaseline />
+				<AppBar position="fixed" open={this.state.isDrawerOpen}>
+					<Toolbar>
+						<IconButton
+							color="inherit"
+							aria-label="open drawer"
+							onClick={this.handleDrawerOpen}
+							edge="start"
+							sx={{ mr: 2, ...(this.state.isDrawerOpen && { display: 'none' }) }}
+						>
+							<MenuIcon />
+						</IconButton>
+						<Typography variant="h6" noWrap component="div">
+							Persistent drawer
+						</Typography>
+					</Toolbar>
+				</AppBar>
+				<Drawer
+					sx={{
 						width: drawerWidth,
-						boxSizing: 'border-box'
-					}
-				}}
-				variant="persistent"
-				anchor="left"
-				open={open}
-			>
-				<DrawerHeader>
-					<IconButton onClick={handleDrawerClose}>
-						<ChevronLeftIcon />
-					</IconButton>
-				</DrawerHeader>
-				<Divider />
-				<Typography variant="h4">Design Your Palette</Typography>
-				<div>
-					<Button variant="contained" color="secondary">
-						Clear Palette
+						flexShrink: 0,
+						'& .MuiDrawer-paper': {
+							width: drawerWidth,
+							boxSizing: 'border-box'
+						}
+					}}
+					variant="persistent"
+					anchor="left"
+					open={this.state.isDrawerOpen}
+				>
+					<DrawerHeader>
+						<IconButton onClick={this.handleDrawerClose}>
+							<ChevronLeftIcon />
+						</IconButton>
+					</DrawerHeader>
+					<Divider />
+					<Typography variant="h4">Design Your Palette</Typography>
+					<div>
+						<Button variant="contained" color="secondary">
+							Clear Palette
+						</Button>
+						<Button variant="contained" color="primary">
+							Random Palette
+						</Button>
+					</div>
+					<ChromePicker color={this.state.currentColor} onChangeComplete={this.updateCurrColor} />
+					<TextField id="filled-basic" label="Filled" variant="filled" />
+					<Button
+						variant="contained"
+						color="primary"
+						style={{ backgroundColor: this.state.currentColor }}
+						onClick={this.addNewColor}
+					>
+						Add Color
 					</Button>
-					<Button variant="contained" color="primary">
-						Random Palette
-					</Button>
-				</div>
-				<ChromePicker color="purple" onChangeComplete={(newColor) => console.log(newColor)} />
-				<TextField id="filled-basic" label="Filled" variant="filled" />
-				<Button variant="contained" color="primary">
-					Add Color
-				</Button>
-			</Drawer>
-			<Main open={open}>
-				<DrawerHeader />
-			</Main>
-		</Box>
-	);
+				</Drawer>
+				<Main open={this.state.isDrawerOpen}>
+					<DrawerHeader />
+					<ul>{this.state.colors.map((color) => <li style={{ backgroundColor: color }}>{color}</li>)}</ul>
+				</Main>
+			</Box>
+		);
+	}
 }
