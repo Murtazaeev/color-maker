@@ -73,6 +73,7 @@ export default class NewPaletteForm extends React.Component {
 		this.updateCurrColor = this.updateCurrColor.bind(this);
 		this.addNewColor = this.addNewColor.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
 		ValidatorForm.addValidationRule('isColorNameUnique', (value) =>
@@ -99,12 +100,22 @@ export default class NewPaletteForm extends React.Component {
 	handleChange(evt) {
 		this.setState({ newName: evt.target.value });
 	}
+	handleSubmit() {
+		let newName = 'New Test palette';
+		const newPalette = {
+			paletteName: newName,
+			id: newName.toLowerCase().replace(/ /g, '-'),
+			colors: this.state.colors
+		};
+		this.props.savePalette(newPalette);
+		this.props.history.push('/');
+	}
 
 	render() {
 		return (
 			<Box sx={{ display: 'flex' }}>
 				<CssBaseline />
-				<AppBar position="fixed" open={this.state.isDrawerOpen}>
+				<AppBar position="fixed" color="default" open={this.state.isDrawerOpen}>
 					<Toolbar>
 						<IconButton
 							color="inherit"
@@ -118,6 +129,9 @@ export default class NewPaletteForm extends React.Component {
 						<Typography variant="h6" noWrap component="div">
 							Persistent drawer
 						</Typography>
+						<Button variant="contained" color="primary" onClick={this.handleSubmit}>
+							Save Palette
+						</Button>
 					</Toolbar>
 				</AppBar>
 				<Drawer
