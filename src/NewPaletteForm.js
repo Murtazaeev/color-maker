@@ -116,6 +116,9 @@ export default class NewPaletteForm extends React.Component {
 		this.props.savePalette(newPalette);
 		this.props.history.push('/');
 	}
+	removeColor(colorName) {
+		this.setState({ colors: this.state.colors.filter((color) => color.name !== colorName) });
+	}
 
 	render() {
 		return (
@@ -204,7 +207,13 @@ export default class NewPaletteForm extends React.Component {
 				</Drawer>
 				<Main open={this.state.isDrawerOpen}>
 					<DrawerHeader />
-					{this.state.colors.map((color) => <DraggableColorBox color={color.color} name={color.name} />)}
+					{this.state.colors.map((color) => (
+						<DraggableColorBox
+							color={color.color}
+							name={color.name}
+							handleClick={() => this.removeColor(color.name)}
+						/>
+					))}
 				</Main>
 			</Box>
 		);
