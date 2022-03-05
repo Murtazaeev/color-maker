@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
-import PaletteFooter from './PaletteFooter';
 import { withStyles } from '@mui/styles';
+import Navbar from './Navbar';
 import ColorBox from './ColorBox';
+import PaletteFooter from './PaletteFooter';
 import styles from './styles/PaletteStyles';
 
 class SingleColorPalette extends Component {
