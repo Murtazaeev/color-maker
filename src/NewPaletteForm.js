@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
+import PaletteMetaForm from './PaletteMetaForm';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -93,9 +94,6 @@ export default class NewPaletteForm extends React.Component {
 		ValidatorForm.addValidationRule('isColorUnique', (value) =>
 			this.state.colors.every(({ color }) => color !== this.state.currentColor)
 		);
-		ValidatorForm.addValidationRule('isPlaetteNameUnique', (value) =>
-			this.props.palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
-		);
 	}
 	handleDrawerOpen = () => {
 		this.setState({ isDrawerOpen: true });
@@ -146,7 +144,7 @@ export default class NewPaletteForm extends React.Component {
 	}
 
 	render() {
-		const { maxColors, classes } = this.props;
+		const { maxColors, palettes, handleSubmit } = this.props;
 		const { colors } = this.state;
 		const isPaletteFull = colors.length >= maxColors;
 		return (
@@ -169,19 +167,7 @@ export default class NewPaletteForm extends React.Component {
 						</Typography>
 					</Toolbar>
 					<div>
-						<ValidatorForm onSubmit={this.handleSubmit}>
-							<TextValidator
-								label="Palette Name"
-								value={this.state.newPaletteName}
-								name="newPaletteName"
-								onChange={this.handleChange}
-								validators={[ 'required', 'isPlaetteNameUnique' ]}
-								errorMessages={[ 'This field is required', 'This Palette name has already been taken' ]}
-							/>
-							<Button variant="contained" type="submit" color="primary">
-								Save Palette
-							</Button>
-						</ValidatorForm>
+						<PaletteMetaForm palettes={palettes} handleSubmit={this.handleSubmit} />
 						<Link to="/">
 							<Button variant="contained" color="primary">
 								Go Back
