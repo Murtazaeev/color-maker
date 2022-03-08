@@ -154,8 +154,11 @@ class NewPaletteForm extends React.Component {
 		super(props);
 		this.state = {
 			open: true,
-			currColor: 'teal'
+			currColor: 'teal',
+			colors: [ 'purple', '#e15764' ]
 		};
+		this.updateCurrColor = this.updateCurrColor.bind(this);
+		this.addNewColor = this.addNewColor.bind(this);
 	}
 
 	handleDrawerOpen = () => {
@@ -166,9 +169,12 @@ class NewPaletteForm extends React.Component {
 		this.setState({ open: false });
 	};
 
-	updateCurrColor = (newColor) => {
+	updateCurrColor(newColor) {
 		this.setState({ currColor: newColor.hex });
-	};
+	}
+	addNewColor() {
+		this.setState({ colors: [ ...this.state.colors, this.state.currentColor ] });
+	}
 
 	render() {
 		const { classes } = this.props;
@@ -226,8 +232,9 @@ class NewPaletteForm extends React.Component {
 					<ChromePicker color={this.state.currColor} onChange={this.updateCurrColor} />
 					<Button
 						variant="contained"
-						color={this.state.currColor}
+						color="primary"
 						style={{ backgroundColor: this.state.currColor }}
+						onClick={this.addNewColor}
 					>
 						Add Color
 					</Button>
@@ -238,6 +245,7 @@ class NewPaletteForm extends React.Component {
 					})}
 				>
 					<div className={classes.drawerHeader} />
+					<ul>{this.state.colors.map((color) => <li style={{ backgroundColor: color }}>{color}</li>)}</ul>
 				</main>
 			</div>
 		);
