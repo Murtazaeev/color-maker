@@ -195,11 +195,14 @@ class NewPaletteForm extends React.Component {
 		this.setState({ colors: [ ...this.state.colors, newColor ], newName: '' });
 	}
 	handleSubmit() {
+		let newName = 'New Test Palette';
 		const newPalette = {
-			paletteName: 'New Test Palette',
+			paletteName: newName,
+			id: newName.toLowerCase().replace(/ /g, '-'),
 			colors: this.state.colors
 		};
 		this.props.savePalette(newPalette);
+		this.props.history.push('/');
 	}
 
 	handleChange(evt) {
@@ -266,14 +269,17 @@ class NewPaletteForm extends React.Component {
 					</div>
 					<ChromePicker color={this.state.currentColor} onChange={this.updateCurrColor} />
 					<ValidatorForm onSubmit={this.addNewColor}>
-						<TextValidator value={this.state.newName} onChange={this.handleChange} />
+						<TextValidator
+							value={this.state.newName}
+							onChange={this.handleChange}
+							validators={[ 'required', 'isColorUnique', 'isColorName' ]}
+							errorMessages={[ 'enter a color name', 'Color already used!', 'Color name must be unique' ]}
+						/>
 						<Button
 							variant="contained"
 							type="submit"
 							color="primary"
 							style={{ backgroundColor: this.state.currentColor }}
-							validators={[ 'required', 'isColorUnique', 'isColorName' ]}
-							errorMessages={[ 'enter a color name', 'Color already used!', 'Color name must be unique' ]}
 						>
 							Add Color
 						</Button>
