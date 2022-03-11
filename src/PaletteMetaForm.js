@@ -39,6 +39,7 @@ class PaletteMetaForm extends Component {
 	};
 
 	render() {
+		const { newPaletteName } = this.state;
 		return (
 			<div>
 				<Button variant="outlined" onClick={this.handleClickOpen}>
@@ -51,10 +52,10 @@ class PaletteMetaForm extends Component {
 							To subscribe to this website, please enter your email address here. We will send updates
 							occasionally.
 						</DialogContentText>
-						<ValidatorForm onSubmit={this.props.handleSubmit}>
+						<ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
 							<TextValidator
 								label="Palette Name"
-								value={this.state.newPaletteName}
+								value={newPaletteName}
 								name="newPaletteName"
 								onChange={this.handleChange}
 								validators={[ 'required', 'isPlaetteNameUnique' ]}

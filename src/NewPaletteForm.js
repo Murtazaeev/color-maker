@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import PaletteFormNav from './PaletteFormNav';
@@ -72,7 +72,7 @@ const styles = (theme) => ({
 	}
 });
 
-class NewPaletteForm extends React.Component {
+class NewPaletteForm extends Component {
 	// static defaultProps = {
 	// 	maxColors: 20
 	// };
@@ -177,16 +177,10 @@ class NewPaletteForm extends React.Component {
 	};
 
 	addNewColor(newColor) {
-		this.setState({ colors: [ ...this.state.colors, newColor ], newColorName: '' });
-	}
-	handleSubmit(newPaletteName) {
-		const newPalette = {
-			paletteName: newPaletteName,
-			id: newPaletteName.toLowerCase().replace(/ /g, '-'),
-			colors: this.state.colors
-		};
-		this.props.savePalette(newPalette);
-		this.props.history.push('/');
+		this.setState({
+			colors: [ ...this.state.colors, newColor ],
+			newColorName: ''
+		});
 	}
 
 	handleChange(evt) {
@@ -194,16 +188,6 @@ class NewPaletteForm extends React.Component {
 			[evt.target.name]: evt.target.value
 		});
 	}
-
-	removeColor(colorName) {
-		this.setState({ colors: this.state.colors.filter((color) => color.name !== colorName) });
-	}
-
-	onSortEnd = ({ oldIndex, newIndex }) => {
-		this.setState(({ colors }) => ({
-			colors: arrayMove(colors, oldIndex, newIndex)
-		}));
-	};
 
 	clearColors() {
 		this.setState({ colors: [] });
@@ -216,6 +200,26 @@ class NewPaletteForm extends React.Component {
 		const randomColor = allColors[rand];
 		this.setState({ colors: [ ...this.state.colors, randomColor ] });
 	}
+
+	handleSubmit(newPaletteName) {
+		const newPalette = {
+			paletteName: newPaletteName,
+			id: newPaletteName.toLowerCase().replace(/ /g, '-'),
+			colors: this.state.colors
+		};
+		this.props.savePalette(newPalette);
+		this.props.history.push('/');
+	}
+
+	removeColor(colorName) {
+		this.setState({ colors: this.state.colors.filter((color) => color.name !== colorName) });
+	}
+
+	onSortEnd = ({ oldIndex, newIndex }) => {
+		this.setState(({ colors }) => ({
+			colors: arrayMove(colors, oldIndex, newIndex)
+		}));
+	};
 
 	render() {
 		const { classes, maxColors, palettes } = this.props;
