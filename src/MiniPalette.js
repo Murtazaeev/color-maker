@@ -18,12 +18,12 @@ class MiniPalette extends PureComponent {
 		this.props.goToPalette(this.props.id);
 	}
 	render() {
-		const { classes, paletteName, emoji, colors, id } = this.props;
+		const { classes, paletteName, emoji, colors } = this.props;
 		const miniColorBoxes = colors.map((color) => (
 			<div className={classes.miniColor} style={{ backgroundColor: color.color }} key={color.name} />
 		));
 		return (
-			<div className={classes.root} onClick={() => this.props.handleClick(id)}>
+			<div className={classes.root} onClick={this.shandleClick}>
 				<div className={classes.delete}>
 					<DeleteIcon className={classes.deleteIcon} onClick={this.deletePalette} />
 				</div>
