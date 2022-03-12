@@ -26,16 +26,17 @@ class PaletteList extends Component {
 		this.openDialog = this.openDialog.bind(this);
 		this.closeDialog = this.closeDialog.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
-		this.goToPaletette = this.goToPaletette.bind(this);
+		this.goToPalette = this.goToPalette.bind(this);
 	}
-	goToPaletette(id) {
-		this.props.history.push(`/palette/${id}`);
-	}
+
 	openDialog(id) {
 		this.setState({ openDeleteDialog: true, deletingId: id });
 	}
 	closeDialog() {
 		this.setState({ openDeleteDialog: false, deletingId: '' });
+	}
+	goToPalette(id) {
+		this.props.history.push(`/palette/${id}`);
 	}
 	handleDelete() {
 		this.props.deletePalette(this.state.deletingId);
@@ -58,8 +59,7 @@ class PaletteList extends Component {
 							<CSSTransition key={palette.id} classNames="fade" timeout={500}>
 								<MiniPalette
 									{...palette}
-									goToPaletette={this.goToPaletette}
-									// handleDelete={deletePalette}
+									goToPalette={this.goToPalette}
 									openDialog={this.openDialog}
 									key={palette.id}
 									id={palette.id}
@@ -68,7 +68,7 @@ class PaletteList extends Component {
 						))}
 					</TransitionGroup>
 				</div>
-				<Dialog open={openDeleteDialog} aria-labelby="delete-dialog-title" onClose={this.closeDialog}>
+				<Dialog open={openDeleteDialog} onClose={this.closeDialog}>
 					<DialogTitle id="delete-dialog-title">Delete this Palette?</DialogTitle>
 					<List>
 						<ListItem button onClick={this.handleDelete}>
@@ -77,7 +77,7 @@ class PaletteList extends Component {
 									<CheckIcon />
 								</Avatar>
 							</ListItemAvatar>
-							<ListItemText>Delete</ListItemText>
+							<ListItemText primary="Delete" />
 						</ListItem>
 						<ListItem button onClick={this.closeDialog}>
 							<ListItemAvatar>
@@ -85,7 +85,7 @@ class PaletteList extends Component {
 									<CloseIcon />
 								</Avatar>
 							</ListItemAvatar>
-							<ListItemText>Close</ListItemText>
+							<ListItemText primary="Cancel" />
 						</ListItem>
 					</List>
 				</Dialog>

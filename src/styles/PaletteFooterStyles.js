@@ -1,5 +1,5 @@
 export default {
-	paletteFooter: {
+	PaletteFooter: {
 		backgroundColor: 'white',
 		height: '5vh',
 		display: 'flex',

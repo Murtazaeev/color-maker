@@ -1,5 +1,3 @@
-import zIndex from '@mui/material/styles/zIndex';
-
 export default {
 	root: {
 		backgroundColor: 'white',

@@ -10,9 +10,6 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 
 class PaletteMetaForm extends Component {
-	state = {
-		open: false
-	};
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -65,12 +62,13 @@ class PaletteMetaForm extends Component {
 					<DialogTitle>Choose a Emoji</DialogTitle>
 					<Picker title="Pick a Palette Emoji" onSelect={this.savePalette} />
 				</Dialog>
+
 				<Dialog open={stage === 'form'} onClose={hideForm}>
 					<DialogTitle>Choose a Palette Name</DialogTitle>
 					<ValidatorForm onSubmit={this.showEmojiPicker}>
 						<DialogContent>
 							<DialogContentText>
-								Please Enter a name for your Palette. Make sure it is unique
+								Please enter a name for your Palette. Make sure it is unique
 							</DialogContentText>
 
 							<TextValidator
