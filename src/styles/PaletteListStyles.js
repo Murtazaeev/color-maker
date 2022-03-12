@@ -35,7 +35,12 @@ export default {
 		}
 	},
 	heading: {
-		fontSize: '2rem'
+		fontSize: '2rem',
+		color: 'black'
+	},
+	create: {
+		color: 'black',
+		textDecoration: 'none'
 	},
 	nav: {
 		display: 'flex',
