@@ -36,7 +36,7 @@ class Palette extends Component {
 				// id={color.id}
 				// paletteId={id}
 				moreUrl={`/palette/${id}/${color.id}`}
-				showingFullPalette={true}
+				showingFullPalette
 			/>
 		));
 		return (
@@ -47,6 +47,7 @@ class Palette extends Component {
 					handleChange={this.changeFormat}
 					showingAllColors
 				/>
+				// Remeber about this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				<div className={classes.paletteColors}>{colorBoxes}</div>
 				<PaletteFooter paletteName={paletteName} emoji={emoji} />
 			</div>

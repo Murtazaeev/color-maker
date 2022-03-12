@@ -19,8 +19,9 @@ class PaletteMetaForm extends Component {
 		};
 		this.handleChange = this.handleChange.bind(this);
 	}
+
 	componentDidMount() {
-		ValidatorForm.addValidationRule('isPlaetteNameUnique', (value) =>
+		ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
 			this.props.palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
 		);
 	}
@@ -40,15 +41,15 @@ class PaletteMetaForm extends Component {
 
 	render() {
 		const { newPaletteName } = this.state;
+		const { hideForm, handleSubmit } = this.props;
 		return (
-			<Dialog open={this.state.open} aria-labelly="form-dialog-title" onClose={this.handleClose}>
+			<Dialog open={this.state.open} onClose={hideForm}>
 				<DialogTitle>Choose a Palette Name</DialogTitle>
-				<ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
+				<ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
 					<DialogContent>
 						<DialogContentText>
 							Please Enter a name for your Palette. Make sure it is unique
 						</DialogContentText>
-
 						<TextValidator
 							label="Palette Name"
 							value={newPaletteName}
@@ -56,12 +57,12 @@ class PaletteMetaForm extends Component {
 							onChange={this.handleChange}
 							fullWidth
 							margin="normal"
-							validators={[ 'required', 'isPlaetteNameUnique' ]}
+							validators={[ 'required', 'isPaletteNameUnique' ]}
 							errorMessages={[ 'This field is required', 'This Palette name has already been taken' ]}
 						/>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={this.props.hideForm} color="primary">
+						<Button onClick={hideForm} color="primary">
 							Cancel
 						</Button>
 						<Button variant="contained" type="submit" color="primary">

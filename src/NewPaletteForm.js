@@ -73,87 +73,9 @@ const styles = (theme) => ({
 });
 
 class NewPaletteForm extends Component {
-	// static defaultProps = {
-	// 	maxColors: 20
-	// };
-
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		isDrawerOpen: false,
-	// 		currentColor: 'teal',
-	// 		newColorName: '',
-	// 		colors: this.props.palettes[0].colors,
-	// 		newPaletteName: ''
-	// 	};
-	// 	this.updateCurrColor = this.updateCurrColor.bind(this);
-	// 	this.addNewColor = this.addNewColor.bind(this);
-	// 	this.handleChange = this.handleChange.bind(this);
-	// 	this.handleSubmit = this.handleSubmit.bind(this);
-	// 	this.removeColor = this.removeColor.bind(this);
-	// 	this.clearColor = this.clearColor.bind(this);
-	// 	this.addRandomColor = this.addRandomColor.bind(this);
-	// }
-	// componentDidMount() {
-	// 	ValidatorForm.addValidationRule('isColorNameUnique', (value) =>
-	// 		this.state.colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
-	// 	);
-	// 	ValidatorForm.addValidationRule('isColorUnique', (value) =>
-	// 		this.state.colors.every(({ color }) => color !== this.state.currentColor)
-	// 	);
-	// }
-	// handleDrawerOpen = () => {
-	// 	this.setState({ isDrawerOpen: true });
-	// };
-
-	// handleDrawerClose = () => {
-	// 	this.setState({ isDrawerOpen: false });
-	// };
-	// updateCurrColor(newColor) {
-	// 	this.setState({ currentColor: newColor.hex });
-	// }
-	// addNewColor() {
-	// 	const newColor = { color: this.state.currentColor, name: this.state.newColorName };
-	// 	this.setState({ colors: [ ...this.state.colors, newColor ], newColorName: '' });
-	// }
-	// handleChange(evt) {
-	// 	this.setState({
-	// 		[evt.target.name]: evt.target.value
-	// 	});
-	// }
-	// handleSubmit() {
-	// 	let newName = this.state.newPaletteName;
-	// 	const newPalette = {
-	// 		paletteName: newName,
-	// 		id: newName.toLowerCase().replace(/ /g, '-'),
-	// 		colors: this.state.colors
-	// 	};
-	// 	this.props.savePalette(newPalette);
-	// 	this.props.history.push('/');
-	// }
-	// removeColor(colorName) {
-	// 	this.setState({ colors: this.state.colors.filter((color) => color.name !== colorName) });
-	// }
-	// onSortEnd = ({ oldIndex, newIndex }) => {
-	// 	this.setState(({ colors }) => ({
-	// 		colors: arrayMove(colors, oldIndex, newIndex)
-	// 	}));
-	// };
-	// clearColor() {
-	// 	this.setState({ colors: [] });
-	// }
-	// addRandomColor() {
-	// 	//pick random color from existing palettes
-	// 	const allColors = this.props.palettes.map((p) => p.colors).flat();
-	// 	var rand = Math.floor(Math.random() * allColors.length);
-	// 	const randomColor = allColors[rand];
-	// 	this.setState({ colors: [ ...this.state.colors, randomColor ] });
-	// }
-
 	static defaultProps = {
 		maxColors: 20
 	};
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -175,17 +97,16 @@ class NewPaletteForm extends Component {
 	handleDrawerClose = () => {
 		this.setState({ open: false });
 	};
+	handleChange(evt) {
+		this.setState({
+			[evt.target.name]: evt.target.value
+		});
+	}
 
 	addNewColor(newColor) {
 		this.setState({
 			colors: [ ...this.state.colors, newColor ],
 			newColorName: ''
-		});
-	}
-
-	handleChange(evt) {
-		this.setState({
-			[evt.target.name]: evt.target.value
 		});
 	}
 
@@ -224,7 +145,7 @@ class NewPaletteForm extends Component {
 	render() {
 		const { classes, maxColors, palettes } = this.props;
 		const { open, colors } = this.state;
-		const paletteIsFull = colors.lenght >= maxColors;
+		const paletteIsFull = colors.length >= maxColors;
 		return (
 			<div className={classes.root}>
 				<PaletteFormNav
@@ -263,10 +184,10 @@ class NewPaletteForm extends Component {
 							</Button>
 							<Button
 								variant="contained"
+								className={classes.button}
 								color="primary"
 								onClick={this.addRandomColor}
 								disabled={paletteIsFull}
-								className={classes.button}
 							>
 								Random Color
 							</Button>

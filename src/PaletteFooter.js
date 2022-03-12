@@ -7,7 +7,7 @@ function PaletteFooter(props) {
 	const { paletteName, emoji } = props;
 	const { classes } = props;
 	return (
-		<footer className={classes.paletteFooter}>
+		<footer className={classes.PaletteFooter}>
 			{paletteName}
 			<span className={classes.emoji}>{emoji}</span>
 		</footer>
