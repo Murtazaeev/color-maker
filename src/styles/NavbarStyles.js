@@ -1,3 +1,4 @@
+import sizes from './sizes';
 export default {
 	Navbar: {
 		display: 'flex',
@@ -20,25 +21,20 @@ export default {
 			color: 'black'
 		}
 	},
-
+	[sizes.down('xs')]: {
+		display: 'none'
+	},
 	slider: {
 		width: '340px',
 		margin: '0 10px',
 		display: 'inline-block',
 		'& .rc-slider-handle': {
-			backgroundColor: 'green',
-			outline: 'none',
-			border: '2px solid green',
-			boxShadow: 'none'
-		},
-		'& .rc-slider-track': {
 			backgroundColor: 'transparent'
 		},
 		'& .rc-slider-rail': {
 			height: '8px'
 		},
-
-		'& .rc-slider-handle, .rc-slider-handle:active, .rc-slider-handle:focus, .rc-slider-handle:hover': {
+		'& .rc-slider-handle, .rc-slider-handle:active, .rc-slider-handle:focus,.rc-slider-handle:hover': {
 			backgroundColor: 'green',
 			outline: 'none',
 			border: '2px solid green',
@@ -48,9 +44,8 @@ export default {
 			marginLeft: '-7px',
 			marginTop: '-3px'
 		},
-
-		linkBruh: {
-			textDecoration: 'none'
+		[sizes.down('sm')]: {
+			width: '150px'
 		}
 	},
 	selectContainer: {
