@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
-import MenuIcon from '@material-ui/icons/Menu';
+import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -57,7 +57,7 @@ class PaletteFormNav extends Component {
 								[classes.hide]: open
 							})}
 						>
-							<MenuIcon />
+							<AddToPhotosIcon />
 						</IconButton>
 
 						<Typography variant="h6" color="inherit" noWrap>
