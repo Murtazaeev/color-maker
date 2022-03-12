@@ -1,3 +1,4 @@
+import sizes from './sizes';
 export default {
 	palette: {
 		height: '100vh',
@@ -15,7 +16,7 @@ export default {
 		position: 'relative',
 		cursor: 'pointer',
 		marginBottom: '-3.5px',
-		opacity: '1',
+		opacity: 1,
 		backgroundColor: 'black',
 		'& a': {
 			color: 'white',
@@ -29,12 +30,24 @@ export default {
 			marginTop: '-15px',
 			textAlign: 'center',
 			outline: 'none',
-			backgroundColor: 'rgba(255, 255, 255, 0.3)',
+			background: 'rgba(255, 255, 255, 0.3)',
 			fontSize: '1rem',
 			lineHeight: '30px',
 			textTransform: 'uppercase',
 			border: 'none',
 			textDecoration: 'none'
+		},
+		[sizes.down('lg')]: {
+			width: '25%',
+			height: '33.3333%'
+		},
+		[sizes.down('md')]: {
+			width: '50%',
+			height: '20%'
+		},
+		[sizes.down('xs')]: {
+			width: '100%',
+			height: '10%'
 		}
 	}
 };
