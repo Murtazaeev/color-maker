@@ -8,6 +8,9 @@ export default {
 	paletteColors: {
 		height: '90%'
 	},
+	// colors: {
+	// 	height: '90%'
+	// },
 	goBack: {
 		width: '20%',
 		height: '50%',
